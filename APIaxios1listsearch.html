@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+</head>
+<body>
+    <button onclick="addlistdata()">Addlist Data</button>
+    <input type="text" id="search" onkeyup="abc()">
+    <ul id="dd"></ul>
+    <script>
+        var x = document.getElementById("dd")
+        var search = document.getElementById("search")
+        function addlistdata(){
+            axios.get("https:jsonplaceholder.typicode.com/posts")
+            .then(function(res){
+                var posts = res.data
+                console.log(posts)
+                function Genlist(){
+                    x.innerHTML=""
+                    posts.forEach(function(post){
+                        var newlist = document.createElement("li")
+                        newlist.innerHTML=post.title
+                        x.appendChild(newlist)
+                    })
+                }
+                Genlist()
+            })
+        }
+        function abc(){
+            axios.get("https:jsonplaceholder.typicode.com/posts").then(function(res){
+            var posts = res.data
+            console.log(posts)
+            x.innerHTML=""
+            posts.filter(function(post){
+                if(post.title.toLowerCase().startsWith(search.value)){
+                    var newlist = document.createElement("li")
+                    newlist.innerHTML=post.title
+                    x.appendChild(newlist)
+                }
+            })
+            })
+        }
+    </script>
+
+    
+</body>
+</html>

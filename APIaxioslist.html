@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+</head>
+<body>
+    <button onclick="addlistdata()">Addlist Data</button>
+    <ul id="dd"></ul>
+    <script>
+        function addlistdata(){
+            axios.get("https://fakestoreapi.com/products")
+            .then(function(res){
+                var products = res.data
+                console.log(products)
+                products.forEach(function(product){
+                    var ul = document.getElementById("dd")
+                    var newlist = document.createElement("li")
+                    newlist.innerHTML=product.title
+                    ul.appendChild(newlist)
+                 
+                })
+
+        })
+    }
+        
+
+        
+    </script>
+    
+</body>
+</html>

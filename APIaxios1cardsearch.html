@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <style>
+        #dd{
+            list-style: none;
+            display: inline-block;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        #dd li{
+            border: 1px solid;
+            border-radius: 10px;
+            width: 250px;
+            height: 250px;
+            padding: 20px;
+            margin: 10px;
+            display: inline-block;
+            justify-content: space-between;
+        }
+        #dd li img{
+            width: 100px;
+            display: flex;
+            justify-content: space-between;
+
+        }
+        
+    </style>
+</head>
+<body>
+    <button onclick="addlistdata()">Addlist Data</button>
+    <input type="text"  id="search" onkeyup="abc()"><br><br>
+    <ul id="dd"></ul>
+    <script>
+    var x=document.getElementById('dd')
+    function addlistdata(){
+        axios.get("https:jsonplaceholder.typicode.com/posts")
+        .then(function(res){
+            var posts = res.data
+            console.log(posts)
+            function Gencard(){
+                x.innerHTML=""
+                posts.forEach(function(post){
+                    var newlist = document.createElement("li")
+                    var pnm = document.createElement("pnm")
+                    pnm.innerHTML=post.title
+                    newlist.appendChild(pnm)
+                    var body = document.createElement("h4")
+                    body.innerHTML=post.body
+                    newlist.appendChild(body)
+                    var userid = document.createElement("h5")
+                    userid.innerHTML='<b>UserId:</b>'+post.userId
+                    newlist.appendChild(userid)
+                    x.appendChild(newlist)
+                    })
+            }
+            Gencard()
+        })
+    }
+    function abc(){
+        axios.get("https:jsonplaceholder.typicode.com/posts")
+        .then(function(res){
+            var posts = res.data
+            console.log(posts)
+            x.innerHTML=""
+            posts.filter(function(post){
+                if(post.title.toLowerCase().startsWith(search.value)){
+                    var newlist = document.createElement("li")
+                    var pnm = document.createElement("pnm")
+                    pnm.innerHTML=post.title
+                    newlist.appendChild(pnm)
+                    var body = document.createElement("h4")
+                    body.innerHTML=post.body
+                    newlist.appendChild(body)
+                    var userid = document.createElement("h5")
+                    userid.innerHTML='<b>UserId:</b>'+post.userId
+                    newlist.appendChild(userid)
+                    x.appendChild(newlist)
+                }
+                    
+                })
+            })
+            }
+        
+    
+    
+
+    </script>
+    
+    
+</body>
+</html>

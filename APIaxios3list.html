@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+</head>
+<body>
+    <button onclick="addlistdata()">Addlist Data</button>
+    <ul id="dd"></ul>
+    <script>
+        function addlistdata(){
+            axios.get("https:jsonplaceholder.typicode.com/photos")
+            .then(function(res){
+                var photos = res.data
+                console.log(photos)
+                photos.forEach(function(photo){
+                    var ul = document.getElementById("dd")
+                    var newlist = document.createElement("li")
+                    newlist.innerHTML=photo.title
+                    ul.appendChild(newlist)
+                 
+                })
+
+        })
+    }
+    </script>
+    
+</body>
+</html>

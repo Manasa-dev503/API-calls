@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <button onclick="addlistdata()">Addlist Data</button>
+    <ul id="dd"></ul>
+    <script>
+    function addlistdata(){
+        $.get("https://restcountries.com/v3.1/all",function(countries,status){
+            console.log("countries::",countries)
+            countries.forEach(function(country){
+                var ul = document.getElementById("dd")
+                var newlist = document.createElement("li")
+                var cnm = document.createElement("cnm")
+                cnm.innerHTML=country.name.common
+                newlist.appendChild(cnm)
+                ul.appendChild(newlist)
+            })
+        })
+    }
+    </script>
+    
+</body>
+</html>

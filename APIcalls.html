@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <button onclick="adddata()">Add data</button>
+    <script>
+        function adddata(){
+            $.get("https://restcountries.com/v3.1/all",function(countries,b){
+                console.log("countries::",countries)
+                console.log("b::",b)
+            })
+
+        }
+        
+    </script>
+    
+</body>
+</html>

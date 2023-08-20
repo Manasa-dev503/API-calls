@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <style>
+        #dd{
+            list-style: none;
+            display: inline-block;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        #dd li{
+            border: 1px solid;
+            border-radius: 10px;
+            width: 250px;
+            height: 250px;
+            padding: 20px;
+            margin: 10px;
+            display: inline-block;
+            justify-content: space-between;
+        }
+        #dd li img{
+            width: 100px;
+            display: flex;
+            justify-content: space-between;
+
+        }
+        
+    </style>
+</head>
+<body>
+    <button onclick="addlistdata()">Addlist Data</button>
+    <ul id="dd"></ul>
+    <script>
+        function addlistdata(){
+            axios.get("https:jsonplaceholder.typicode.com/users")
+            .then(function(res){
+                var users = res.data
+                console.log(users)
+                users.forEach(function(user){
+                    var ul = document.getElementById("dd")
+                    var newlist = document.createElement("li")
+                    var pnm = document.createElement("pnm")
+                    pnm.innerHTML=user.name
+                    newlist.appendChild(pnm)
+                    var uname = document.createElement("h4")
+                    uname.innerHTML=user.username
+                    newlist.appendChild(uname)
+                    var website = document.createElement("h3")
+                    website.innerHTML='<b>Website</b>'+user.website
+                    newlist.appendChild(website)
+                    ul.appendChild(newlist)
+
+                 
+                })
+
+        })
+    }
+        
+
+        
+    </script>
+    
+</body>
+</html>

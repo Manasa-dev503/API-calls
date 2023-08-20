@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <button onclick="addlistdata()">Addlist Data</button>
+    <input type="text" id="dd">
+    <div id="df"></div>
+    <script>
+        var x = document.getElementById('df')
+        var dd = document.getElementById("dd")
+        function addlistdata(){
+            var url = "https://api.dictionaryapi.dev/api/v2/entries/en"
+            x.innerHTML=""
+            axios.get(`${url}/${dd.value}`)
+            .then(function(res){
+                var dict = res.data
+                console.log(dict)
+                var di = document.createElement("div")
+                di.style.border="1px solid black"
+                di.style.backgroundColor="darkgrey"
+                di.style.width="fit-content"
+                var d1 = document.createElement("h1")
+                d1.innerHTML=dict[0].word
+                di.appendChild(d1)
+                var d2 = document.createElement("h4")
+                d2.innerHTML=dict[0].meanings[0].partOfSpeech
+                di.appendChild(d2)
+                var d3 = document.createElement("b")
+                d3.innerHTML="UK"
+                di.appendChild(d3)
+                var d4 = document.createElement("audio")
+                d4.setAttribute('id','uksound')
+                var d41 = document.createElement("source")
+                d41.src=dict[0].phonetics[1].audio
+                console.log(d41)
+                d4.appendChild(d41)
+                di.appendChild(d4)
+                var ukvolbtn = document.createElement("div")
+                ukvolbtn.setAttribute('class','fa fa-volume-up')
+                ukvolbtn.setAttribute('onClick','uksound.load();uksound.play()') 
+                di.appendChild(ukvolbtn)
+                var d5 = document.createElement("b")
+                d5.innerHTML=dict[0].phonetics[1].text
+                di.appendChild(d5)
+                var d6 = document.createElement("b")
+                d6.innerHTML="US"
+                di.appendChild(d6)
+                var usvolbtn = document.createElement("div")
+                usvolbtn.setAttribute('class','fa fa-volume-up')
+                usvolbtn.setAttribute('onClick','ussound.load();ussound.play()') 
+                di.appendChild(usvolbtn)
+                var d42 = document.createElement("audio")
+                d42.setAttribute('id','ussound')
+                var d43 = document.createElement("source")
+                d43.src=dict[0].phonetics[2].audio
+                console.log(d43)
+                d42.appendChild(d43)
+                di.appendChild(d42)
+                var d7 = document.createElement("b")
+                d7.innerHTML=dict[0].phonetics[2].text
+                di.appendChild(d7)
+                var d8 = document.createElement("h3")
+                d8.innerHTML="Meaning"
+                di.appendChild(d8)
+                var ul = document.createElement("ul")
+                var li = document.createElement("li")
+                li.innerHTML=dict[0].meanings[0].definitions[0].definition
+                ul.appendChild(li)
+                di.appendChild(ul)
+                var ul = document.createElement("ul")
+                var li1 = document.createElement("li")
+                li1.innerHTML=dict[0].meanings[0].definitions[1].definition
+                ul.appendChild(li1)
+                di.appendChild(ul)
+                var ul = document.createElement("ul")
+                var li2 = document.createElement("li")
+                li2.innerHTML=dict[0].meanings[0].definitions[2].definition
+                ul.appendChild(li2)
+                di.appendChild(ul)
+                var ul = document.createElement("ul")
+                var li3 = document.createElement("li")
+                li3.innerHTML=dict[0].meanings[0].definitions[3].definition
+                ul.appendChild(li3)
+                di.appendChild(ul)
+                var ul = document.createElement("ul")
+                var li4 = document.createElement("li")
+                li4.innerHTML=dict[0].meanings[0].definitions[4].definition
+                ul.appendChild(li4)
+                di.appendChild(ul)
+                var ul = document.createElement("ul")
+                var li5 = document.createElement("li")
+                li5.innerHTML=dict[0].meanings[0].definitions[5].definition
+                ul.appendChild(li5)
+                di.appendChild(ul)
+                var ul = document.createElement("ul")
+                var li6 = document.createElement("li")
+                li6.innerHTML=dict[0].meanings[0].definitions[6].definition
+                ul.appendChild(li6)
+                di.appendChild(ul)
+                var ul = document.createElement("ul")
+                var li7 = document.createElement("li")
+                li7.innerHTML=dict[0].meanings[0].definitions[7].definition
+                ul.appendChild(li7)
+                di.appendChild(ul)
+                var ul = document.createElement("ul")
+                var li8 = document.createElement("li")
+                li8.innerHTML=dict[0].meanings[0].definitions[8].definition
+                ul.appendChild(li8)
+                di.appendChild(ul)
+                var d9 = document.createElement("h3")
+                d9.innerHTML="Example"
+                di.appendChild(d9)
+                var ul = document.createElement("ul")
+                var li = document.createElement("li")
+                li.innerHTML=dict[0].meanings[0].definitions[1].example
+                ul.appendChild(li)
+                di.appendChild(ul)
+                var ul = document.createElement("ul")
+                var li1 = document.createElement("li")
+                li1.innerHTML=dict[0].meanings[0].definitions[4].example
+                ul.appendChild(li1)
+                di.appendChild(ul)
+                var ul = document.createElement("ul")
+                var li2 = document.createElement("li")
+                li2.innerHTML=dict[0].meanings[0].definitions[7].example
+                ul.appendChild(li2)
+                di.appendChild(ul)
+                var ul = document.createElement("ul")
+                var li3 = document.createElement("li")
+                li3.innerHTML=dict[0].meanings[0].definitions[9].example
+                ul.appendChild(li3)
+                di.appendChild(ul)
+                var ul = document.createElement("ul")
+                var li4 = document.createElement("li")
+                li4.innerHTML=dict[0].meanings[0].definitions[12].example
+                ul.appendChild(li4)
+                di.appendChild(ul)
+                x.appendChild(di)
+                
+
+            })
+        }
+    
+                
+        </script>
+    
+</body>
+</html>

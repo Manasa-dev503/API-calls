@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+</head>
+<body>
+    <button onclick="addlistdata()">Addlist Data</button><br><br>
+    <div id="df"></div>
+    <script>
+        var x = document.getElementById('df')
+        function addlistdata(){
+            var url = "https://pokeapi.co/api/v2/pokemon"
+            var dd = Math.floor(Math.random()*500+1)
+            x.innerHTML=""
+            axios.get(`${url}/${dd}`)
+            .then(function(res){
+                var gen = res.data
+                console.log(gen)
+                var di = document.createElement("div")
+                di.style.width="250px"
+                di.style.backgroundColor="pink"
+                di.style.boxShadow="5px 10px"
+                var di1 = document.createElement("div")
+                var image = document.createElement("img")
+                image.src=gen.sprites.front_default
+                image.style.border="1px solid"
+                image.style.width="70px"
+                image.style.height="70px"
+                image.style.borderRadius="50%"
+                image.style.marginTop="5px"
+                di1.appendChild(image)
+                di1.style.justifyContent="center"
+                di1.style.display="flex"
+                di.appendChild(di1)
+                var name = document.createElement("b")
+                name.innerHTML="<b>Name:</b>"+gen.name
+                name.style.fontSize="x-large"
+                di.appendChild(name)
+                var hp = document.createElement("h4")
+                hp.innerHTML="<b>HP:</b>"+gen.stats[0].base_stat
+                hp.style.display="flex-top"
+                hp.style.display="inline-block"
+                hp.style.display="flex"
+                di.appendChild(hp)
+                var attack = document.createElement("h4")
+                attack.innerHTML="<b>attack:</b>"+gen.stats[1].base_stat
+                attack.style.display="inline"
+                di.appendChild(attack)
+                var defence = document.createElement("h4")
+                defence.innerHTML="<b>Defence:</b>"+gen.stats[2].base_stat
+                di.appendChild(defence)
+                var speed = document.createElement("h4")
+                speed.innerHTML="<b>Speed:</b>"+gen.stats[5].base_stat
+                di.appendChild(speed)
+                x.appendChild(di)
+            })
+        }
+        
+        
+    </script>
+    
+</body>
+</html>

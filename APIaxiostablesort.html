@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+</head>
+<body>
+    <button type="button"  onclick="addlistdata()">Addlist Data</button>
+    <button type="button" onclick="asc()">Ascending</button>
+    <button type="button" onclick="dec()">Descending</button><br><br>
+    <div id="dd"></div>
+    <script>
+    var d = document.getElementById("dd")
+    var t=document.createElement("table")
+    t.style.border="1px solid"
+    t.style.width="500px"
+    var o=document.createElement('thead')
+    var tbody=document.createElement('tbody')
+    tbody.setAttribute('id','tablebody')
+    var j=document.createElement('tfoot')
+    var x=document.createElement("tr")
+    var y=document.createElement("th")
+    y.style.border="1px solid"
+    y.innerHTML="Title"
+    var y1=document.createElement("th")
+    y1.style.border="1px solid"
+    y1.innerHTML="Image"
+    var y2=document.createElement("th")
+    y2.style.border="1px solid"
+    y2.innerHTML="Price"
+    var y3=document.createElement("th")
+    y3.style.border="1px solid"
+    y3.innerHTML="Category"
+    x.appendChild(y)
+    x.appendChild(y1)
+    x.appendChild(y2)
+    x.appendChild(y3)
+    o.appendChild(x)
+    t.appendChild(x)
+    t.appendChild(o)
+    t.appendChild(tbody)
+    t.appendChild(j)
+    d.appendChild(t)
+    function addlistdata(){
+        axios.get("https://fakestoreapi.com/products")
+        .then(function(res){
+            var products = res.data
+            console.log(products)
+            products.forEach(function(product){
+                var x1=document.createElement("tr")
+                var z=document.createElement("td")
+                z.style.border="1px solid"
+                z.innerHTML=product.title
+                x1.appendChild(z)
+                var z1=document.createElement("img")
+                z1.style.border="1px solid"
+                z1.style.width="100px"
+                z1.src=product.image
+                x1.appendChild(z1)
+                var z2=document.createElement("td")
+                z2.style.border="1px solid"
+                z2.innerHTML=product.price
+                x1.appendChild(z2)
+                var z3=document.createElement("td")
+                z3.style.border="1px solid"
+                z3.innerHTML=+product.category
+                x1.appendChild(z3)
+                tbody.appendChild(x1)
+                t.appendChild(tbody)
+                d.appendChild(t)
+            })
+        })
+    }
+    function asc(){
+        document.getElementById("tablebody").innerHTML=""
+        axios.get("https://fakestoreapi.com/products")
+        .then(function(res){
+            var products = res.data
+            products.sort(function(a,b){
+                if(a.title<b.title){
+                    return -1
+                }
+                if(b.title<a.title){
+                    return 1
+                }
+                return 0
+            })
+            products.forEach(function(product){
+                var x1=document.createElement("tr")
+                var z=document.createElement("td")
+                z.style.border="1px solid"
+                z.innerHTML=product.title
+                x1.appendChild(z)
+                var z1=document.createElement("img")
+                z1.style.border="1px solid"
+                z1.style.width="100px"
+                z1.src=product.image
+                x1.appendChild(z1)
+                var z2=document.createElement("td")
+                z2.style.border="1px solid"
+                z2.innerHTML=product.price
+                x1.appendChild(z2)
+                var z3=document.createElement("td")
+                z3.style.border="1px solid"
+                z3.innerHTML=product.category
+                x1.appendChild(z3)
+                tbody.appendChild(x1)
+                t.appendChild(tbody)
+                d.appendChild(t)
+            })
+        })
+    }
+    function dec(){
+        document.getElementById("tablebody").innerHTML=""
+    axios.get("https://fakestoreapi.com/products")
+        .then(function(res){
+            var products = res.data
+            products.sort(function(a,b){
+                if(a.title<b.title){
+                    return 1
+                }
+                if(b.title<a.title){
+                    return -1
+                }
+                return 0
+            })
+            products.forEach(function(product){
+                var x1=document.createElement("tr")
+                var z=document.createElement("td")
+                z.style.border="1px solid"
+                z.innerHTML=product.title
+                x1.appendChild(z)
+                var z1=document.createElement("img")
+                z1.style.border="1px solid"
+                z1.style.width="100px"
+                z1.src=product.image
+                x1.appendChild(z1)
+                var z2=document.createElement("td")
+                z2.style.border="1px solid"
+                z2.innerHTML=+product.price
+                x1.appendChild(z2)
+                var z3=document.createElement("td")
+                z3.style.border="1px solid"
+                z3.innerHTML=+product.category
+                x1.appendChild(z3)
+                tbody.appendChild(x1)
+                t.appendChild(tbody)
+                d.appendChild(t)
+            })
+        })
+    }
+
+
+
+
+    
+    
+    
+    </script>
+    
+    
+</body>
+</html>

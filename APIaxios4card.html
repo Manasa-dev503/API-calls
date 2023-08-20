@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+</head>
+<body>
+    <button onclick="addlistdata()">Addlist Data</button>
+    <div id="dd"></div>
+    <script>
+        var x = document.getElementById('dd')
+        function addlistdata(){
+            var url = "https://api.quotable.io/random"
+            x.innerHTML=""
+            axios.get(url)
+            .then(function(res){
+                var photos = res.data
+                console.log(photos)
+                var di = document.createElement("div")
+                di.style.border="1px solid black"
+                di.style.backgroundColor="darkgrey"
+                di.style.width="270px"
+                di.style.height="200px"
+                di.style.padding="20px"
+                di.style.margin="10px"
+                di.style.display="inline-block"
+                di.style.justifyContent="space-between"
+                var cont = document.createElement("h3")
+                cont.innerHTML=photos.content
+                di.appendChild(cont)
+                var auth = document.createElement("b")
+                auth.innerHTML='<b>Author:</b>'+photos.author
+                di.appendChild(auth)
+                x.appendChild(di)
+                 
+                })
+
+            }
+        
+
+        
+    </script>
+    
+</body>
+</html>

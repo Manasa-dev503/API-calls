@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+</head>
+<body>
+    <button onclick="addlistdata()">Addlist Data</button>
+    <input type="text" id="search" onkeyup="abc()">
+    <ul id="dd"></ul>
+    <script>
+        var x = document.getElementById("dd")
+        var search = document.getElementById("search")
+        function addlistdata(){
+            axios.get("https://fakestoreapi.com/products")
+            .then(function(res){
+                var products = res.data
+                console.log(products)
+                function Genlist(){
+                    x.innerHTML=""
+                    products.forEach(function(product){
+                        var newlist = document.createElement("li")
+                        newlist.innerHTML=product.title
+                        x.appendChild(newlist)
+                    })
+                }
+                Genlist()
+            })
+        }
+        function abc(){
+            axios.get("https://fakestoreapi.com/products").then(function(res){
+            var products = res.data
+            console.log(products)
+            x.innerHTML=""
+            products.filter(function(product){
+                if(product.title.toLowerCase().startsWith(search.value)){
+                    var newlist = document.createElement("li")
+                    newlist.innerHTML=product.title
+                    x.appendChild(newlist)
+                }
+            })
+            })
+        }
+    </script>
+
+    
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <style>
+        #dd{
+            list-style: none;
+            display: inline-block;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        #dd li{
+            border: 1px solid;
+            border-radius: 10px;
+            width: 250px;
+            height: 150px;
+            padding: 20px;
+            margin: 10px;
+            display: inline-block;
+            justify-content: space-between;
+        }
+        #dd li img{
+            width: 200px;
+            display: flex;
+
+        }
+        
+    </style>
+</head>
+<body>
+    <button onclick="addlistdata()">Addlist Data</button>
+    <ul id="dd"></ul>
+    
+    <script>
+        function addlistdata(){
+            $.get("https://restcountries.com/v3.1/all",function(countries,status){
+                console.log("countries::",countries)
+                countries.forEach(function(country){
+                    var newlist = document.createElement("li")
+                    var cnm = document.createElement("cnm")
+                    cnm.innerHTML=country.name.common
+                    newlist.appendChild(cnm)
+                    var flg = document.createElement("img")
+                    flg.src=country.flags.svg
+                    newlist.appendChild(flg)
+                    var popultn = document.createElement("popultn")
+                    popultn.innerHTML="Population:"+country.population
+                    newlist.appendChild(popultn)
+                    document.getElementById("dd").appendChild(newlist)
+                })
+
+            })
+        }
+
+    </script>
+    
+</body>
+</html>

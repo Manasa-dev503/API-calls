@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+</head>
+<body>
+    <button onclick="addlistdata()">Addlist Data</button>
+    <input type="text"  id="search" onkeyup="abc()"><br><br>
+    <div id="dd"></div>
+    <script>
+        var d = document.getElementById("dd")
+        var t=document.createElement("table")
+        t.style.border="1px solid"
+        t.style.width="500px"
+        var o=document.createElement('thead')
+        var j=document.createElement('tfoot')
+        var x=document.createElement("tr")
+        var y=document.createElement("th")
+        y.style.border="1px solid"
+        y.innerHTML="Title"
+        var y1=document.createElement("th")
+        y1.style.border="1px solid"
+        y1.innerHTML="Image"
+        var y2=document.createElement("th")
+        y2.style.border="1px solid"
+        y2.innerHTML="AlbumID"
+        x.appendChild(y)
+        x.appendChild(y1)
+        x.appendChild(y2)
+        o.appendChild(x)
+        t.appendChild(x)
+        t.appendChild(o)
+        t.appendChild(j)
+        d.appendChild(t)
+        function addlistdata(){
+            j.innerHTML=""
+        axios.get("https:jsonplaceholder.typicode.com/photos")
+        .then(function(res){
+            var photos = res.data
+            console.log(photos)
+                photos.forEach(function(photo){
+                var x1=document.createElement("tr")
+                var z=document.createElement("td")
+                z.style.border="1px solid"
+                z.innerHTML=photo.title
+                x1.appendChild(z)
+                var z1=document.createElement("img")
+                z1.style.border="1px solid"
+                z1.style.width="100px"
+                z1.src=photo.url
+                x1.appendChild(z1)
+                var z2=document.createElement("td")
+                z2.style.border="1px solid"
+                z2.innerHTML=photo.albumId
+                x1.appendChild(z2)
+                t.appendChild(x1)
+                j.appendChild(x1)
+                d.appendChild(t)
+            })
+        })
+    }
+    addlistdata()
+    function abc(){
+        var d1 = document.getElementById("dd")
+        d1.innerHTML=""
+        var search = document.getElementById("search").value
+        var d = document.getElementById("dd")
+        var t=document.createElement("table")
+        t.style.border="1px solid"
+        t.style.width="500px"
+        var o=document.createElement('thead')
+        var j=document.createElement('tfoot')
+        var x=document.createElement("tr")
+        var y=document.createElement("th")
+        y.style.border="1px solid"
+        y.innerHTML="Title"
+        var y1=document.createElement("th")
+        y1.style.border="1px solid"
+        y1.innerHTML="Image"
+        var y2=document.createElement("th")
+        y2.style.border="1px solid"
+        y2.innerHTML="AlbumID"
+        x.appendChild(y)
+        x.appendChild(y1)
+        x.appendChild(y2)
+        o.appendChild(x)
+        t.appendChild(x)
+        t.appendChild(o)
+        t.appendChild(j)
+        var tbody = document.createElement("tbody")
+        axios.get("https:jsonplaceholder.typicode.com/photos")
+        .then(function(res){
+            var photos = res.data
+            console.log(photos)
+            photos.filter(function(photo){
+                if(photo.title.toLowerCase().startsWith(search)){
+                    var x1=document.createElement("tr")
+                    var z=document.createElement("td")
+                    z.style.border="1px solid"
+                    z.innerHTML=photo.title
+                    x1.appendChild(z)
+                    var z1=document.createElement("img")
+                    z1.style.border="1px solid"
+                    z1.style.width="100px"
+                    z1.src=photo.url
+                    x1.appendChild(z1)
+                    var z2=document.createElement("td")
+                    z2.style.border="1px solid"
+                    z2.innerHTML=photo.albumId
+                    x1.appendChild(z2)
+                    tbody.appendChild(x1)
+                    t.appendChild(tbody)
+                    d1.appendChild(t)
+
+
+
+                }
+            })
+        })
+    }
+
+
+
+
+
+
+
+
+
+
+            
+
+
+
+
+
+    </script>
+    
+</body>
+</html>

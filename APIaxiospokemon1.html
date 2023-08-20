@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+</head>
+<body>
+    <button onclick="addlistdata()">Addlist Data</button>
+    <input type="text" id="dd">
+    <br><br>
+    <div id="df"></div>
+    <script>
+        var x = document.getElementById('df')
+        function addlistdata(){
+            var url = "https://pokeapi.co/api/v2/pokemon"
+            var dd = document.getElementById("dd")
+            if(dd.value==0){
+                alert("Between 1 to 500 only")
+            }
+            else if(dd.value>500){
+                alert("Between 1 to 500 only")
+            }
+            else{
+                x.innerHTML=""
+                axios.get(`${url}/${dd.value}`)
+                .then(function(res){
+                    var gen = res.data
+                    console.log(gen)
+                    var di = document.createElement("div")
+                    di.setAttribute("class","card w-20")
+                    di.style.width="fit-content"
+                    di.style.backgroundColor="pink"
+                    di.style.boxShadow="5px 10px"
+                    //di.style.margin = "auto";
+                    //di.style.border="3px solid"
+                    //di.style.padding="10px"
+                    var image = document.createElement("img")
+                    image.setAttribute("class","card-img-top")
+                    image.src=gen.sprites.front_default
+                    image.style.width="200px"
+                    image.style.height="100px"
+                    image.style.borderRadius="50%"
+                    di.appendChild(image)
+                    var di1 = document.createElement("div")
+                    di1.setAttribute("class","card-body")
+                    di.appendChild(di1)
+                    var name = document.createElement("h3")
+                    name.innerHTML="<b>Name : </b>"+gen.name
+                    di.appendChild(name)
+                    var hp = document.createElement("span")
+                    hp.setAttribute("class","badge bg-secondary align-middle")
+                    hp.innerHTML="<b>HP:</b>"+gen.stats[0].base_stat
+                    hp.style.width="50px"
+                    hp.style.display="flex-top"
+                    hp.style.display="inline-block"
+                    hp.style.display="flex"
+                    hp.style.align="center"
+                    hp.style.marginBottom="8px"
+                    hp.style.marginLeft="70px"
+                    di.appendChild(hp)
+                    var type = document.createElement("div")
+                    type.setAttribute("class"," badge bg-warning d-flex")
+                    type.innerHTML=gen.types[0].type.name
+                    type.style.width="60px"
+                    type.style.marginBottom="8px"
+                    type.style.marginLeft="70px"
+                    di.appendChild(type)
+                    var y = document.createElement("div")
+                    y.setAttribute("class","d-flex flex-row")
+                    var attack = document.createElement("div")
+                    attack.setAttribute("class","badge bg-dark")
+                    attack.innerHTML="<b>attack:</b>"+gen.stats[1].base_stat
+                    attack.style.width="80px"
+                    attack.style.marginBottom="8px"
+                    attack.style.marginLeft="10px"
+                    y.appendChild(attack)
+                    var defence = document.createElement("div")
+                    defence.setAttribute("class","badge bg-primary")
+                    defence.innerHTML="<b>Defence:</b>"+gen.stats[2].base_stat
+                    defence.style.width="80px"
+                    defence.style.marginBottom="8px"
+                    defence.style.marginLeft="10px"
+                    y.appendChild(defence)
+                    di.appendChild(y)
+                    var speed = document.createElement("div")
+                    speed.setAttribute("class","badge bg-success")
+                    speed.innerHTML="<b>Speed:</b>"+gen.stats[5].base_stat
+                    speed.style.width="100px"
+                    speed.style.marginBottom="8px"
+                    speed.style.marginLeft="60px"
+                    di.appendChild(speed)
+                    x.appendChild(di)
+
+
+                
+            })
+        }
+    }
+    </script>
+    
+</body>
+</html>
